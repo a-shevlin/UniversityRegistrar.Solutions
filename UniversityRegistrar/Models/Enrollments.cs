@@ -4,7 +4,7 @@ namespace University.Models
 {
   public class Enrollments
   {
-    public int EnrollmentId { get; set; }
+    public int EnrollmentsId { get; set; }
     public int StudentId { get; set; }
     public int CourseId { get; set; }
     public virtual Student Student { get; set; }
