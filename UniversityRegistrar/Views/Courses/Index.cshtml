@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Linq;
+@using University.Models;
+@model List<University.Models.Course>;
+
+<div>
+  <h1>Course List</h1>
+</div>
+<div>
+  @if (Model.Count == 0)
+  {
+    <p>There are no courses. Please add a course</p>
+  }
+  else
+  {
+    <table class="table table-hover table-responsive-md">
+      <thead>
+        <th>Course Name</th>
+        <th>Course Number</th>
+      </thead>
+    @foreach (Course course in Model)
+    {
+      <td>@Html.ActionLink($"{course.Name}", "Details", new { id = course.CourseId })</td>
+      <td>@course.Number</td>
+    }
+    </table>
+  }
+
+  @Html.ActionLink("Add Course", "Create", "Courses", null, new { @class="htmlButton"})
+  @Html.ActionLink("Home", "Index", "Home", null, new { @class="htmlButton"})
+</div>
