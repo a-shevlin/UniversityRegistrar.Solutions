@@ -1,0 +1,27 @@
+#footer {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.htmlButton {
+  background-color: #F4D6CC;
+  border: 3px groove #F4B860;
+  border-radius: 4px;
+  margin: 4px;
+  padding: 3px;
+  width: max-content;
+  text-align: center;
+  box-shadow: 2px 5px #89595f;
+}
+
+.htmlButton:hover {
+  color: #C83E4D;
+}
+
+.htmlButton:active {
+  box-shadow: 2px 2px #89595f;
+  transform: perspective(90%) translateZ(-1em);
+}
