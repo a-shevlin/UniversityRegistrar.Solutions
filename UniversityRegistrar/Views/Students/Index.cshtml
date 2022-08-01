@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Linq;
+@using University.Models;
+@model List<University.Models.Student>;
+
+<div>
+  <h1>Student List</h1>
+</div>
+<div class="container">
+  @if (Model.Count == 0)
+  {
+    <p>There are no students. Please add a student.</p>
+  }
+  else
+  {
+    <table class="table table-hover table-responsive-md">
+      <thead>
+        <th>Name</th>
+        <th>Date Enrolled</th>
+      </thead>
+    @foreach (Student student in Model)
+    {
+      <tr>
+        <td>@Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId })</td>
+        <td>@student.EnrollmentDate.ToShortDateString()</td>
+      </tr>
+    }
+    </table>
+  }
+
+  @Html.ActionLink("Add Student", "Create", "Students", null, new { @class="htmlButton"})
+  @Html.ActionLink("Home", "Index", "Home", null, new { @class="htmlButton"})
+</div>

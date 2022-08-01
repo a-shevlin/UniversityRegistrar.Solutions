@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using University.Models;
 
@@ -10,35 +11,15 @@ using University.Models;
 namespace UniversityRegistrar.Migrations
 {
     [DbContext(typeof(UniversityRegistrarContext))]
-    partial class UniversityRegistrarContextModelSnapshot : ModelSnapshot
+    [Migration("20220801221940_V2")]
+    partial class V2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("University.Models.Complete", b =>
-                {
-                    b.Property<int>("CompleteId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CompleteId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Complete");
-                });
 
             modelBuilder.Entity("University.Models.Course", b =>
                 {
@@ -98,25 +79,6 @@ namespace UniversityRegistrar.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("University.Models.Complete", b =>
-                {
-                    b.HasOne("University.Models.Course", "Course")
-                        .WithMany("CompleteEntities")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("University.Models.Student", "Student")
-                        .WithMany("CompleteEntities")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("University.Models.Enrollments", b =>
                 {
                     b.HasOne("University.Models.Course", "Course")
@@ -138,15 +100,11 @@ namespace UniversityRegistrar.Migrations
 
             modelBuilder.Entity("University.Models.Course", b =>
                 {
-                    b.Navigation("CompleteEntities");
-
                     b.Navigation("JoinEntities");
                 });
 
             modelBuilder.Entity("University.Models.Student", b =>
                 {
-                    b.Navigation("CompleteEntities");
-
                     b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618

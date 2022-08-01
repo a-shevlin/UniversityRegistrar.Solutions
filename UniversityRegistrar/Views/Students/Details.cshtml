@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model University.Models.Student;
+
+<div>
+  <h1>@Model.Name Details</h1>
+  <h4>@Model.EnrollmentDate.ToShortDateString()</h4>
+</div>
+<div>
+  @if( @Model.JoinEntities.Count == 0)
+  {
+    <p>@Model.Name is not enrolled in any courses.</p>
+  }
+  else
+  {
+    <h4>Enrollments</h4>
+    @foreach(var join in Model.JoinEntities)
+    {
+      @Html.ActionLink($"{join.Course.Name}", "Details", "Courses", new {id = join.Course.CourseId}, new { @target="_blank" })
+    }
+  }
+  <br>
+  <br>
+
+  @Html.ActionLink("Enroll in Courses", "AddCourses", new { id = Model.StudentId }, new { @class="htmlButton"})
+</div>

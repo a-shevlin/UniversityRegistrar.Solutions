@@ -9,7 +9,7 @@
 <div>
   <h1>Course List</h1>
 </div>
-<div>
+<div class="container">
   @if (Model.Count == 0)
   {
     <p>There are no courses. Please add a course</p>
@@ -23,8 +23,10 @@
       </thead>
     @foreach (Course course in Model)
     {
-      <td>@Html.ActionLink($"{course.Name}", "Details", new { id = course.CourseId })</td>
-      <td>@course.Number</td>
+      <tr>
+        <td>@Html.ActionLink($"{course.Name}", "Details", new { id = course.CourseId })</td>
+        <td>@course.Number</td>
+      </tr>
     }
     </table>
   }

@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model University.Models.Course;
+
+<div>
+  <h1>@Model.Name's Details</h1>
+</div>
+<div>
+  <h3>Students Enrolled in @Model.Name</h3>
+  @if (Model.JoinEntities.Count == 0)
+  {
+    <p>No students enrolled in this course.</p>
+  }
+  else
+  {
+    foreach (var join in Model.JoinEntities)
+    {
+      @join.Student.Name
+    }
+  }
+
+</div>

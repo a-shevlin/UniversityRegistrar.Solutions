@@ -14,5 +14,6 @@ namespace University.Models
     public string Name { get; set; }
     public string Number { get; set; }
     public virtual ICollection<Enrollments> JoinEntities { get; }
+    public virtual ICollection<Complete> CompleteEntities { get; }
   }
 }
