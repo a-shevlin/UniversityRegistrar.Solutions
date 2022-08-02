@@ -8,6 +8,7 @@ namespace University.Models
     public Student()
     {
     this.JoinEntities = new HashSet<Enrollments>();
+    this.CompleteEntities = new HashSet<Complete>();
     Completed = false;
     }
     

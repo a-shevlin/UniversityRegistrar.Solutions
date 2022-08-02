@@ -8,6 +8,8 @@ namespace University.Models
     public DbSet<Student> Students { get; set; }
     public DbSet<Enrollments> Enrollments { get; set; }
     public DbSet<Complete> Complete { get; set; }
+    public DbSet<Major> Majors { get; set; }
+    public DbSet<Departments> Departments { get; set; }
 
     public UniversityRegistrarContext(DbContextOptions options) : base(options) {}
 

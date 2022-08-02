@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Linq;
+@using University.Models;
+@model List<University.Models.Departments>;
+
+<div>
+  <h1>Departments List</h1>
+</div>
+<div class="container">
+  @if (Model.Count == 0)
+  {
+    <p>There are no Departments. Please add a Departments.</p>
+  }
+  else
+  {
+    <table class="table table-hover table-responsive-md">
+      <thead>
+        <th>Name</th>
+        <th>Date Enrolled</th>
+      </thead>
+    @foreach (Departments departments in Model)
+    {
+      <tr>
+        <td>@Html.ActionLink($"{departments.Name}", "Details", new { id = departments.DepartmentsId })</td>
+      </tr>
+    }
+    </table>
+  }
+
+  @Html.ActionLink("Add Departments", "Create", "Departments", null, new { @class="htmlButton"})
+  @Html.ActionLink("Home", "Index", "Home", null, new { @class="htmlButton"})
+</div>

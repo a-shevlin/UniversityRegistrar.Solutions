@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@model University.Models.Major;
+
+<div>
+  <h1>Add a new Major</h1>
+</div>
+<div class="container">
+  @using (Html.BeginForm())
+  {
+    @Html.Label("Name: ");
+    @Html.TextBoxFor(model =>  model.Name);
+    <br>
+    <input type="submit" value="Add Major"/>
+  }
+  <br>
+  @Html.ActionLink("See Majors", "Index", "Majors", null, new { @class="htmlButton"})
+</div>

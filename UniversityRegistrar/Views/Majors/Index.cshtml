@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Linq;
+@using University.Models;
+@model List<University.Models.Major>;
+
+<div>
+  <h1>Major List</h1>
+</div>
+<div class="container">
+  @if (Model.Count == 0)
+  {
+    <p>There are no Majors. Please add a Major.</p>
+  }
+  else
+  {
+    <table class="table table-hover table-responsive-md">
+      <thead>
+        <th>Major</th>
+      </thead>
+    @foreach (Major major in Model)
+    {
+      <tr>
+        <td>@Html.ActionLink($"{major.Name}", "Details", new { id = major.MajorId })</td>
+      </tr>
+    }
+    </table>
+  }
+
+  @Html.ActionLink("Add Major", "Create", "Majors", null, new { @class="htmlButton"})
+  @Html.ActionLink("Home", "Index", "Home", null, new { @class="htmlButton"})
+</div>

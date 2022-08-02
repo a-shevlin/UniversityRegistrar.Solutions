@@ -28,12 +28,17 @@ namespace UniversityRegistrar.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MajorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("CompleteId");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("MajorId");
 
                     b.HasIndex("StudentId");
 
@@ -57,6 +62,25 @@ namespace UniversityRegistrar.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("University.Models.Departments", b =>
+                {
+                    b.Property<int>("DepartmentsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MajorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("DepartmentsId");
+
+                    b.HasIndex("MajorId");
+
+                    b.ToTable("Departments");
+                });
+
             modelBuilder.Entity("University.Models.Enrollments", b =>
                 {
                     b.Property<int>("EnrollmentsId")
@@ -66,6 +90,9 @@ namespace UniversityRegistrar.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MajorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
@@ -73,9 +100,25 @@ namespace UniversityRegistrar.Migrations
 
                     b.HasIndex("CourseId");
 
+                    b.HasIndex("MajorId");
+
                     b.HasIndex("StudentId");
 
                     b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("University.Models.Major", b =>
+                {
+                    b.Property<int>("MajorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("MajorId");
+
+                    b.ToTable("Majors");
                 });
 
             modelBuilder.Entity("University.Models.Student", b =>
@@ -106,6 +149,10 @@ namespace UniversityRegistrar.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("University.Models.Major", null)
+                        .WithMany("CompleteEntities")
+                        .HasForeignKey("MajorId");
+
                     b.HasOne("University.Models.Student", "Student")
                         .WithMany("CompleteEntities")
                         .HasForeignKey("StudentId")
@@ -117,6 +164,17 @@ namespace UniversityRegistrar.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("University.Models.Departments", b =>
+                {
+                    b.HasOne("University.Models.Major", "Major")
+                        .WithMany("JoinDepartments")
+                        .HasForeignKey("MajorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Major");
+                });
+
             modelBuilder.Entity("University.Models.Enrollments", b =>
                 {
                     b.HasOne("University.Models.Course", "Course")
@@ -124,6 +182,10 @@ namespace UniversityRegistrar.Migrations
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("University.Models.Major", null)
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("MajorId");
 
                     b.HasOne("University.Models.Student", "Student")
                         .WithMany("JoinEntities")
@@ -139,6 +201,15 @@ namespace UniversityRegistrar.Migrations
             modelBuilder.Entity("University.Models.Course", b =>
                 {
                     b.Navigation("CompleteEntities");
+
+                    b.Navigation("JoinEntities");
+                });
+
+            modelBuilder.Entity("University.Models.Major", b =>
+                {
+                    b.Navigation("CompleteEntities");
+
+                    b.Navigation("JoinDepartments");
 
                     b.Navigation("JoinEntities");
                 });

@@ -9,6 +9,13 @@
   <h4>@Model.EnrollmentDate.ToShortDateString()</h4>
 </div>
 <div>
+  @* @if(@Model.JoinDepartment.Count == 0)
+  {
+    <p>@Model.Name is not in a department</p>
+    <p>Please declare your Major!</p>
+    @Html.ActionLink("Add Major", "Major", "Major", new { id = Model.StudentId })
+  } *@
+
   @if( @Model.JoinEntities.Count == 0)
   {
     <p>@Model.Name is not enrolled in any courses.</p>

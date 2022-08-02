@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@model University.Models.Major;
+
+<div>
+  <h1>@Model.Name Details</h1>
+</div>
+<div>
+  @if(@Model.JoinDepartments.Count == 0)
+  {
+    <p>@Model.Name is not in a department</p>
+    @Html.ActionLink("Add Department", "Create", "Departments", new { id = Model.MajorId })
+  }
+  <br>
+  <br>
+
+  @Html.ActionLink("Add Major", "Create", "Majors", null, new { @class="htmlButton"})
+</div>

@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@* Student model = new Student(passed in controller); *@
+@model University.Models.Major;
+@using University.Models;
+@using System.Collections;
+
+<div>
+  <h1>Add Department to Major @ViewBag.MajorId</h1>
+</div>
+<div>
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.MajorId)
+    @Html.Label("Department")
+    @Html.TextBoxFor(model => model.JoinDepartments.Name)
+    <input type="submit" value="Add"/>
+  }
+</div>
